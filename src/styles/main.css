@@ -1,0 +1,68 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #131327;
+}
+
+.container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  background: linear-gradient(
+    325deg,
+    rgba(19, 19, 39, 1) 0%,
+    rgba(21, 19, 59, 1) 35%,
+    rgba(18, 18, 149, 1) 100%
+  );
+  padding: 40px 60px;
+}
+
+h2 {
+  font-size: 3em;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.reset {
+  padding: 15px 20px;
+  width: 100%;
+  color: #000;
+  background-color: #fff;
+  border: none;
+  font-size: 1.5em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.reset:focus {
+  background-color: #03001e;
+  color: #fff;
+}
+
+.game {
+  width: 430px;
+  height: 430px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+
+.card {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+}
