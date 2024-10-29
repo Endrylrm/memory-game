@@ -3,7 +3,8 @@ body {
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: #131327;
+  background: #131327;
+  user-select: none;
 }
 
 .container {
@@ -24,7 +25,7 @@ body {
 
 h2 {
   font-size: 3em;
-  color: #ffffff;
+  color: #fff;
   text-transform: uppercase;
   letter-spacing: 0.1em;
 }
@@ -65,4 +66,28 @@ h2 {
   align-items: center;
   justify-content: center;
   background-color: #fff;
+  cursor: pointer;
+
+  font-size: 3em;
+  transition: 0.5s;
+  transform: rotateY(180deg);
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #404040;
+  transition: 0.25s;
+  transform: rotateY(0deg);
+  backface-visibility: hidden;
+}
+
+.card.cardOpen {
+  transform: rotateY(0deg);
+}
+
+.cardOpen::after,
+.cardMatch::after {
+  transform: rotateY(180deg);
 }
