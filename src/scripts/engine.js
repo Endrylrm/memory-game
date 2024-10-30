@@ -7,7 +7,7 @@ const state = {
   values: {
     emojis: ["👾", "🤠", "👻", "👹", "🤖", "😡", "🤡", "👽"],
     currentScore: 0,
-    currentTime: 60,
+    currentTime: 120,
     wonGame: false,
   },
   actions: {
@@ -17,18 +17,26 @@ const state = {
 
 let openCards = [];
 
-let shuffledEmojis = state.values.emojis
-  // duplicar emojis na lista
-  .flatMap((emoji) => [emoji, emoji])
-  // randomizar a lista de emojis
-  .sort(() => (Math.random() > 0.5 ? 2 : -1));
+function restartGame() {
+  if (document.querySelectorAll(".card").length > 0) {
+    document.querySelectorAll(".card").forEach((card) => {
+      card.remove();
+    });
+  }
 
-for (let iterator = 0; iterator < shuffledEmojis.length; iterator++) {
-  let box = document.createElement("div");
-  box.className = "card";
-  box.innerHTML = shuffledEmojis[iterator];
-  box.onclick = handleClick;
-  state.views.game.appendChild(box);
+  let shuffledEmojis = state.values.emojis
+    // duplicar emojis na lista
+    .flatMap((emoji) => [emoji, emoji])
+    // randomizar a lista de emojis
+    .sort(() => (Math.random() > 0.5 ? 2 : -1));
+
+  for (let iterator = 0; iterator < shuffledEmojis.length; iterator++) {
+    let box = document.createElement("div");
+    box.className = "card";
+    box.innerHTML = shuffledEmojis[iterator];
+    box.onclick = handleClick;
+    state.views.game.appendChild(box);
+  }
 }
 
 function countDown() {
@@ -37,8 +45,9 @@ function countDown() {
   }
   state.values.currentTime--;
   state.views.timeLeft.innerHTML = state.values.currentTime;
-  if (state.values.currentTime <= 0 && !state.values.wonGame) {
-    GameOver(state.values.currentScore);
+  if (state.values.currentTime <= 0) {
+    state.values.wonGame = true;
+    GameOver();
   }
 }
 
@@ -74,15 +83,20 @@ function checkMatch() {
 
   openCards = [];
 
-  if (
-    document.querySelectorAll(".cardMatch").length === shuffledEmojis.length
-  ) {
-    alert("Você venceu!!!");
-    state.values.wonGame = true;
+  let emojisLength = state.values.emojis.length * 2;
+
+  if (document.querySelectorAll(".cardMatch").length === emojisLength) {
+    restartGame();
   }
 }
 
-function GameOver(score) {
+function GameOver() {
   clearInterval(state.actions.countDownTimer);
-  alert("Game Over! o seu resultado foi: " + score);
+  alert("Game Over! sua pontuação final foi: " + state.values.currentScore);
 }
+
+function main() {
+  restartGame();
+}
+
+main();
