@@ -3,17 +3,22 @@ const state = {
     game: document.querySelector("#game"),
     timeLeft: document.querySelector("#time-left"),
     score: document.querySelector("#score"),
+    winScore: document.querySelector("#win-score"),
   },
   values: {
     emojis: ["👾", "🤠", "👻", "👹", "🤖", "😡", "🤡", "👽"],
     currentScore: 0,
     currentTime: 120,
+    scoreToWin: 24,
     wonGame: false,
   },
   actions: {
     countDownTimer: setInterval(countDown, 1000),
+    checkWinTimer: setInterval(checkWin, 1000),
   },
 };
+
+state.views.winScore.innerHTML = state.values.scoreToWin;
 
 let openCards = [];
 
@@ -46,13 +51,12 @@ function countDown() {
   state.values.currentTime--;
   state.views.timeLeft.innerHTML = state.values.currentTime;
   if (state.values.currentTime <= 0) {
-    state.values.wonGame = true;
     GameOver();
   }
 }
 
 function handleClick() {
-  if (state.values.currentTime <= 0) {
+  if (state.values.currentTime <= 0 || state.values.wonGame) {
     return;
   }
 
@@ -88,6 +92,18 @@ function checkMatch() {
   if (document.querySelectorAll(".cardMatch").length === emojisLength) {
     restartGame();
   }
+}
+
+function checkWin() {
+  if (state.values.currentScore === state.values.scoreToWin) {
+    winGame();
+  }
+}
+
+function winGame() {
+  state.values.wonGame = true;
+  alert("Você ganhou por atingir a pontuação para vencer!");
+  clearInterval(state.actions.checkWinTimer);
 }
 
 function GameOver() {
