@@ -9,7 +9,7 @@ const state = {
     emojis: ["👾", "🤠", "👻", "👹", "🤖", "😡", "🤡", "👽"],
     currentScore: 0,
     currentTime: 120,
-    scoreToWin: 24,
+    scoreToWin: 40,
     wonGame: false,
   },
   actions: {
