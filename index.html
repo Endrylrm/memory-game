@@ -9,10 +9,20 @@
   </head>
   <body>
     <div class="container">
-      <h2>JOGO DA MEMÓRIA</h2>
-      <div class="game"></div>
+      <h2 class="title">JOGO DA MEMÓRIA</h2>
+      <div class="menu">
+        <div class="menu-time">
+          <h2>Tempo rest.</h2>
+          <h2 id="time-left">60</h2>
+        </div>
+        <div class="menu-score">
+          <h2>Sua pontuação</h2>
+          <h2 id="score">0</h2>
+        </div>
+      </div>
+      <div id="game"></div>
       <button class="reset" onclick="window.location.reload()">
-        RESET GAME
+        RESETAR JOGO
       </button>
     </div>
     <script src="src/scripts/engine.js" defer></script>

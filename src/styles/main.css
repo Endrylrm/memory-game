@@ -24,10 +24,19 @@ body {
 }
 
 h2 {
-  font-size: 3em;
   color: #fff;
+}
+
+.title {
+  font-size: 3em;
   text-transform: uppercase;
   letter-spacing: 0.1em;
+}
+
+.menu {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
 }
 
 .reset {
@@ -48,7 +57,7 @@ h2 {
   color: #fff;
 }
 
-.game {
+#game {
   width: 430px;
   height: 430px;
   display: flex;
